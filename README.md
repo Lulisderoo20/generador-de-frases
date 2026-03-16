@@ -25,8 +25,8 @@ Despues abre `http://localhost:8000`.
 
 1. Sube este contenido a un repositorio en GitHub.
 2. Usa la rama `main`.
-3. En GitHub, activa Pages con **GitHub Actions**.
-4. El workflow en `.github/workflows/deploy-pages.yml` publica la raiz del proyecto.
+3. En GitHub Pages, publica desde la rama `main` y la carpeta raiz (`/`).
+4. Como la app es estatica, no necesita build ni workflow para desplegar.
 
 ## Instalar como app
 
