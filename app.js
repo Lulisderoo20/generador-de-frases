@@ -662,9 +662,14 @@ function registerServiceWorker() {
   }
 
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch((error) => {
-      console.error(error);
-    });
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then((registration) => {
+        registration.update().catch(() => {});
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   });
 }
 

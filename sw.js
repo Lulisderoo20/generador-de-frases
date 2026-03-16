@@ -1,16 +1,28 @@
-const CACHE_NAME = "luchi-story-cache-v1";
+const CACHE_NAME = "luchi-story-cache-v2";
 const STATIC_ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
   "./site.webmanifest",
+  "./assets/favicon.ico",
   "./assets/icon.svg",
   "./assets/icon-192.png",
   "./assets/icon-512.png",
   "./assets/apple-touch-icon.png",
   "./assets/og-image.png",
 ];
+
+function isAppShellRequest(request) {
+  const url = new URL(request.url);
+  return (
+    request.mode === "navigate" ||
+    url.pathname.endsWith(".html") ||
+    url.pathname.endsWith(".css") ||
+    url.pathname.endsWith(".js") ||
+    url.pathname.endsWith(".webmanifest")
+  );
+}
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -43,9 +55,22 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  if (event.request.mode === "navigate") {
+  if (isAppShellRequest(event.request)) {
     event.respondWith(
-      fetch(event.request).catch(() => caches.match("./index.html")),
+      fetch(event.request)
+        .then((networkResponse) => {
+          const responseCopy = networkResponse.clone();
+
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseCopy);
+          });
+
+          return networkResponse;
+        })
+        .catch(async () => {
+          const cachedResponse = await caches.match(event.request);
+          return cachedResponse || caches.match("./index.html");
+        }),
     );
     return;
   }
