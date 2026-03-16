@@ -5,228 +5,196 @@ const DEFAULT_SIGNATURE = "@luchilisdero";
 
 const palettes = [
   {
-    name: "Cafe solar",
-    background: ["#110d10", "#1a1316", "#09070a"],
-    glowA: "#5c3224",
-    glowB: "#3f2534",
-    accent: "#f4d0a2",
-    frame: "#a36b4d",
+    name: "Durazno pop",
+    background: "#ffb38a",
+    accent: "#4d261f",
+    frame: "#7a4137",
   },
   {
-    name: "Oliva editorial",
-    background: ["#0b100d", "#121912", "#060907"],
-    glowA: "#314734",
-    glowB: "#253126",
-    accent: "#c6e2ae",
-    frame: "#647e59",
+    name: "Limon fresco",
+    background: "#d8f05e",
+    accent: "#243115",
+    frame: "#536928",
   },
   {
-    name: "Mar profundo",
-    background: ["#091018", "#101827", "#060a11"],
-    glowA: "#243f61",
-    glowB: "#1f2d48",
-    accent: "#b8def9",
-    frame: "#58728e",
+    name: "Menta punch",
+    background: "#8de6ca",
+    accent: "#173930",
+    frame: "#3b6d60",
   },
   {
-    name: "Vino y durazno",
-    background: ["#140b10", "#211018", "#0a0508"],
-    glowA: "#592434",
-    glowB: "#462134",
-    accent: "#ffc9ab",
-    frame: "#9d5b67",
+    name: "Aqua piscina",
+    background: "#7adaf6",
+    accent: "#15374f",
+    frame: "#41708b",
   },
   {
-    name: "Carbon coral",
-    background: ["#0c0d11", "#15171c", "#060709"],
-    glowA: "#57332c",
-    glowB: "#2c3340",
-    accent: "#ffb59b",
-    frame: "#8c5d55",
+    name: "Rosa chicle",
+    background: "#ff97c7",
+    accent: "#4f2139",
+    frame: "#8a516d",
   },
   {
-    name: "Ciruela de noche",
-    background: ["#0e0911", "#17101d", "#070509"],
-    glowA: "#4e315d",
-    glowB: "#2a2b46",
-    accent: "#d9c0ff",
-    frame: "#775b95",
+    name: "Lavanda happy",
+    background: "#c8a8ff",
+    accent: "#35224d",
+    frame: "#705595",
   },
   {
-    name: "Naranja y rosa",
-    background: ["#2b1214", "#5a2236", "#16080d"],
-    glowA: "#ff7b3a",
-    glowB: "#ff4fa1",
-    accent: "#ffb089",
-    frame: "#a15a63",
+    name: "Coral juicy",
+    background: "#ff917c",
+    accent: "#4c241d",
+    frame: "#8b4a3f",
   },
   {
-    name: "Rosa sunset",
-    background: ["#2a1020", "#56203a", "#120712"],
-    glowA: "#ff5ea8",
-    glowB: "#ff8f4c",
-    accent: "#ff9dc6",
-    frame: "#9a6177",
+    name: "Amarillo manteca",
+    background: "#ffd65b",
+    accent: "#4a380f",
+    frame: "#8a6d26",
   },
   {
-    name: "Verde y rosa",
-    background: ["#0f1e16", "#1f4d35", "#08100c"],
-    glowA: "#1ed47b",
-    glowB: "#ff5db1",
-    accent: "#f3a6cf",
-    frame: "#69806a",
+    name: "Pistacho cool",
+    background: "#a9df6b",
+    accent: "#233b16",
+    frame: "#5c7a34",
   },
   {
-    name: "Lima fosforescente",
-    background: ["#181f08", "#3d4d0c", "#0a0d03"],
-    glowA: "#c8ff29",
-    glowB: "#7cb518",
-    accent: "#d9ff5f",
-    frame: "#7c8e3f",
+    name: "Cielo candy",
+    background: "#8ec8ff",
+    accent: "#1e3958",
+    frame: "#4d7299",
   },
   {
-    name: "Melon pop",
-    background: ["#28110d", "#63241b", "#110706"],
-    glowA: "#ff8c69",
-    glowB: "#ff5e7e",
-    accent: "#ff9f87",
-    frame: "#9d625d",
+    name: "Sandia alegre",
+    background: "#ff728f",
+    accent: "#4b1628",
+    frame: "#8f4056",
   },
   {
-    name: "Citrico editorial",
-    background: ["#201b08", "#50440c", "#0d0903"],
-    glowA: "#ffe45e",
-    glowB: "#c0ff3e",
-    accent: "#f1ef95",
-    frame: "#8c8650",
+    name: "Mandarina feliz",
+    background: "#ff9c4c",
+    accent: "#50280f",
+    frame: "#8e5631",
   },
   {
-    name: "Matcha bubblegum",
-    background: ["#102118", "#24583b", "#07100b"],
-    glowA: "#57d98a",
-    glowB: "#ff5fb3",
-    accent: "#ff9fca",
-    frame: "#66806a",
+    name: "Lila bubble",
+    background: "#d8b6ff",
+    accent: "#39254c",
+    frame: "#765596",
   },
   {
-    name: "Mandarina digital",
-    background: ["#2a1208", "#6b260f", "#120603"],
-    glowA: "#ff7a1a",
-    glowB: "#ff4f7b",
-    accent: "#ffb45f",
-    frame: "#a16858",
+    name: "Verde apple",
+    background: "#8fe56b",
+    accent: "#1f3814",
+    frame: "#56853c",
   },
   {
-    name: "Azul y lima",
-    background: ["#0d1a28", "#193b63", "#060b11"],
-    glowA: "#42c8ff",
-    glowB: "#c9ff2f",
-    accent: "#d7ff7a",
-    frame: "#688260",
+    name: "Turquesa gelato",
+    background: "#5fe3d4",
+    accent: "#133c37",
+    frame: "#44857c",
   },
   {
-    name: "Coral de club",
-    background: ["#2a1012", "#5e2021", "#110607"],
-    glowA: "#ff6f61",
-    glowB: "#ff4fd8",
-    accent: "#ff968d",
-    frame: "#9a6263",
+    name: "Guava pop",
+    background: "#ff9aa2",
+    accent: "#4b2328",
+    frame: "#8f5961",
   },
   {
-    name: "Cherry chrome",
-    background: ["#260d17", "#531832", "#0e0610"],
-    glowA: "#ff4f7f",
-    glowB: "#6f7cff",
-    accent: "#ff9ab1",
-    frame: "#8c5e77",
+    name: "Sunshine",
+    background: "#f8ea63",
+    accent: "#4a4110",
+    frame: "#8c7f2d",
   },
   {
-    name: "Arena acida",
-    background: ["#221b08", "#56430c", "#0e0903"],
-    glowA: "#ffe66d",
-    glowB: "#d7ff5d",
-    accent: "#f6df72",
-    frame: "#9a8656",
+    name: "Blue lagoon",
+    background: "#66c6ff",
+    accent: "#163a54",
+    frame: "#4a7697",
   },
   {
-    name: "Fuego fucsia",
-    background: ["#2a0d12", "#671828", "#13060a"],
-    glowA: "#ff6a2a",
-    glowB: "#ff3cac",
-    accent: "#ffb08a",
-    frame: "#ab5b66",
+    name: "Naranja y verde",
+    background: "#ff9f2f",
+    accent: "#1f5a22",
+    frame: "#6e7b2f",
   },
   {
-    name: "Tropical neon",
-    background: ["#0b1f1a", "#104738", "#04100d"],
-    glowA: "#00d9a6",
-    glowB: "#ffe14a",
-    accent: "#8fffe1",
-    frame: "#4e8d7d",
+    name: "Verde y naranja",
+    background: "#92df48",
+    accent: "#8a3309",
+    frame: "#7d6a2e",
   },
   {
-    name: "Limon soda",
-    background: ["#152006", "#394f09", "#080d03"],
-    glowA: "#d9ff38",
-    glowB: "#9aff00",
-    accent: "#e9ff8e",
-    frame: "#8da74b",
+    name: "Azul y rojo",
+    background: "#7eb9ff",
+    accent: "#7a1830",
+    frame: "#7d5a73",
   },
   {
-    name: "Electric guava",
-    background: ["#22101b", "#5a1d4a", "#0e0710"],
-    glowA: "#ff4f96",
-    glowB: "#ff8a3d",
-    accent: "#ffb3d4",
-    frame: "#a2607f",
+    name: "Rosa y rojo",
+    background: "#ff98c9",
+    accent: "#8b102f",
+    frame: "#9a5669",
   },
   {
-    name: "Jade punch",
-    background: ["#0c1d16", "#174d3e", "#050f0b"],
-    glowA: "#25e39c",
-    glowB: "#b8ff4d",
-    accent: "#b4ffd9",
-    frame: "#5c8d75",
+    name: "Rojo con rosa",
+    background: "#ffb0d2",
+    accent: "#a1112f",
+    frame: "#9d5b6d",
   },
   {
-    name: "Mango rave",
-    background: ["#251108", "#66270c", "#100603"],
-    glowA: "#ff8c1a",
-    glowB: "#ffd23f",
-    accent: "#ffc56e",
-    frame: "#b17541",
+    name: "Pomelo pop",
+    background: "#ffb27f",
+    accent: "#4c2813",
+    frame: "#8b5938",
   },
   {
-    name: "Blue candy",
-    background: ["#0b1630", "#173d7a", "#050a14"],
-    glowA: "#2fd3ff",
-    glowB: "#6c63ff",
-    accent: "#a7e8ff",
-    frame: "#5979a8",
+    name: "Mint candy",
+    background: "#aaf0d1",
+    accent: "#18392c",
+    frame: "#4c7e69",
   },
   {
-    name: "Purple acid",
-    background: ["#190d27", "#43196b", "#0a0610"],
-    glowA: "#d05cff",
-    glowB: "#d9ff3a",
-    accent: "#efb0ff",
-    frame: "#8c63a8",
+    name: "Helado de uva",
+    background: "#caa8ff",
+    accent: "#33214a",
+    frame: "#6c5192",
   },
   {
-    name: "Sandia pop",
-    background: ["#240d12", "#611822", "#100507"],
-    glowA: "#ff5c7a",
-    glowB: "#49ff95",
-    accent: "#ffb3bf",
-    frame: "#a8616b",
+    name: "Lima soda",
+    background: "#c5ef62",
+    accent: "#283515",
+    frame: "#61762f",
   },
   {
-    name: "Sunset pool",
-    background: ["#1a1027", "#3f2b75", "#090610"],
-    glowA: "#ff8b3d",
-    glowB: "#48d6ff",
-    accent: "#ffc58e",
-    frame: "#8b74ae",
+    name: "Caramelo coral",
+    background: "#ff8f86",
+    accent: "#4a201c",
+    frame: "#8a4f48",
+  },
+  {
+    name: "Aqua pop",
+    background: "#7fe7f2",
+    accent: "#153944",
+    frame: "#4d7f87",
+  },
+  {
+    name: "Fresa pastel",
+    background: "#ffacc8",
+    accent: "#4a2237",
+    frame: "#87566a",
+  },
+  {
+    name: "Pera divertida",
+    background: "#b7ea7a",
+    accent: "#263815",
+    frame: "#607d36",
+  },
+  {
+    name: "Arandano soft",
+    background: "#92b9ff",
+    accent: "#203655",
+    frame: "#56769a",
   },
 ];
 
@@ -257,7 +225,6 @@ const context = canvas.getContext("2d", { alpha: false });
 
 let currentStyle = null;
 let deferredInstallPrompt = null;
-let grainPattern = null;
 
 function pickRandom(items) {
   return items[Math.floor(Math.random() * items.length)];
@@ -288,40 +255,10 @@ function roundedRectPath(ctx, x, y, width, height, radius) {
   ctx.closePath();
 }
 
-function createGrainPattern() {
-  const noiseCanvas = document.createElement("canvas");
-  noiseCanvas.width = 180;
-  noiseCanvas.height = 180;
-  const noiseContext = noiseCanvas.getContext("2d");
-
-  noiseContext.fillStyle = "rgba(255, 255, 255, 0.035)";
-
-  for (let index = 0; index < 1400; index += 1) {
-    const x = Math.random() * noiseCanvas.width;
-    const y = Math.random() * noiseCanvas.height;
-    const size = Math.random() > 0.85 ? 2 : 1;
-    noiseContext.fillRect(x, y, size, size);
-  }
-
-  noiseContext.fillStyle = "rgba(0, 0, 0, 0.028)";
-
-  for (let index = 0; index < 900; index += 1) {
-    const x = Math.random() * noiseCanvas.width;
-    const y = Math.random() * noiseCanvas.height;
-    noiseContext.fillRect(x, y, 1, 1);
-  }
-
-  return context.createPattern(noiseCanvas, "repeat");
-}
-
 function makeStyle() {
   return {
     palette: pickRandom(palettes),
     font: pickRandom(fontChoices),
-    noiseOpacity: 0.18 + Math.random() * 0.05,
-    blobShiftX: 180 + Math.random() * 120,
-    blobShiftY: 180 + Math.random() * 120,
-    quoteScale: 0.92 + Math.random() * 0.16,
     frameInset: 76 + Math.random() * 24,
   };
 }
@@ -436,77 +373,22 @@ function fitPhraseBlock(text, style) {
 
 function drawBackdrop(style) {
   const { palette } = style;
-  const baseGradient = context.createLinearGradient(0, 0, STORY_WIDTH, STORY_HEIGHT);
-  baseGradient.addColorStop(0, palette.background[0]);
-  baseGradient.addColorStop(0.52, palette.background[1]);
-  baseGradient.addColorStop(1, palette.background[2]);
-  context.fillStyle = baseGradient;
-  context.fillRect(0, 0, STORY_WIDTH, STORY_HEIGHT);
-
-  const glowOne = context.createRadialGradient(
-    style.blobShiftX,
-    style.blobShiftY,
-    10,
-    style.blobShiftX,
-    style.blobShiftY,
-    440,
-  );
-  glowOne.addColorStop(0, hexToRgba(palette.glowA, 0.52));
-  glowOne.addColorStop(1, hexToRgba(palette.glowA, 0));
-  context.fillStyle = glowOne;
-  context.fillRect(0, 0, STORY_WIDTH, STORY_HEIGHT);
-
-  const glowTwoX = STORY_WIDTH - style.blobShiftX + 80;
-  const glowTwoY = STORY_HEIGHT - style.blobShiftY + 80;
-  const glowTwo = context.createRadialGradient(glowTwoX, glowTwoY, 20, glowTwoX, glowTwoY, 520);
-  glowTwo.addColorStop(0, hexToRgba(palette.glowB, 0.42));
-  glowTwo.addColorStop(1, hexToRgba(palette.glowB, 0));
-  context.fillStyle = glowTwo;
-  context.fillRect(0, 0, STORY_WIDTH, STORY_HEIGHT);
-
-  const veil = context.createLinearGradient(0, 0, 0, STORY_HEIGHT);
-  veil.addColorStop(0, "rgba(255, 255, 255, 0.04)");
-  veil.addColorStop(0.3, "rgba(255, 255, 255, 0.01)");
-  veil.addColorStop(1, "rgba(0, 0, 0, 0.16)");
-  context.fillStyle = veil;
+  context.fillStyle = palette.background;
   context.fillRect(0, 0, STORY_WIDTH, STORY_HEIGHT);
 
   const inset = style.frameInset;
   roundedRectPath(context, inset, inset, STORY_WIDTH - inset * 2, STORY_HEIGHT - inset * 2, 58);
-  context.strokeStyle = hexToRgba(palette.frame, 0.34);
+  context.strokeStyle = hexToRgba(palette.frame, 0.42);
   context.lineWidth = 2;
   context.stroke();
 
-  context.strokeStyle = hexToRgba(palette.accent, 0.18);
-  context.lineWidth = 4;
+  context.strokeStyle = hexToRgba(palette.frame, 0.3);
+  context.lineWidth = 3;
   context.lineCap = "round";
-
   context.beginPath();
-  context.moveTo(148, 178);
-  context.lineTo(STORY_WIDTH - 148, 178);
+  context.moveTo(176, 176);
+  context.lineTo(STORY_WIDTH - 176, 176);
   context.stroke();
-
-  context.beginPath();
-  context.moveTo(STORY_WIDTH / 2 - 160, STORY_HEIGHT - 256);
-  context.lineTo(STORY_WIDTH / 2 + 160, STORY_HEIGHT - 256);
-  context.stroke();
-
-  context.save();
-  context.translate(210, 360);
-  context.rotate(-0.12);
-  context.scale(style.quoteScale, style.quoteScale);
-  context.font = `italic 700 820px ${style.font.family}`;
-  context.fillStyle = hexToRgba(palette.accent, 0.05);
-  context.fillText('"', 0, 0);
-  context.restore();
-
-  if (grainPattern) {
-    context.save();
-    context.globalAlpha = style.noiseOpacity;
-    context.fillStyle = grainPattern;
-    context.fillRect(0, 0, STORY_WIDTH, STORY_HEIGHT);
-    context.restore();
-  }
 }
 
 function drawPhraseBlock(phrase, style) {
@@ -786,7 +668,6 @@ function attachEvents() {
 }
 
 async function boot() {
-  grainPattern = createGrainPattern();
   registerInstallPrompt();
   registerServiceWorker();
   attachEvents();
