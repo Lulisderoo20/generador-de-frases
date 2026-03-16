@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Luchi Story Maker</title>
+    <meta
+      name="description"
+      content="Genera historias editoriales para Instagram con tipografias premium, paletas random y firma automatica."
+    >
+    <meta name="theme-color" content="#120f16">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Luchi Story">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:title" content="Luchi Story Maker">
+    <meta
+      property="og:description"
+      content="Crea historias 1080x1920 con estilo editorial, firma automatica y botones para descargar, compartir e instalar."
+    >
+    <meta property="og:image" content="./assets/og-image.png">
+    <meta property="og:image:alt" content="Vista previa editorial de Luchi Story Maker">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Luchi Story Maker">
+    <meta
+      name="twitter:description"
+      content="Genera historias listas para tus redes con un look editorial y elegante."
+    >
+    <meta name="twitter:image" content="./assets/og-image.png">
+    <link rel="icon" type="image/svg+xml" href="./assets/icon.svg">
+    <link rel="icon" type="image/png" href="./assets/icon-192.png">
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@1,9..144,700,0&family=Playfair+Display:ital,wght@1,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+    >
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="page-glow page-glow--left" aria-hidden="true"></div>
+    <div class="page-glow page-glow--right" aria-hidden="true"></div>
+
+    <main class="app-shell">
+      <header class="hero-strip reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Luchi Story Maker</p>
+          <h1>Historias listas para compartir con look editorial.</h1>
+          <p class="hero-text">
+            Escribis la frase, la app mezcla tipografias premium y paletas en tendencia,
+            firma cada historia con <strong>@luchilisdero</strong> y te la deja lista para
+            descargar, compartir o instalar como acceso directo.
+          </p>
+        </div>
+        <div class="hero-pill panel">
+          <span>Formato historia</span>
+          <strong>1080 x 1920</strong>
+        </div>
+      </header>
+
+      <div class="app-grid">
+        <section class="panel control-panel reveal">
+          <div class="panel-topline">
+            <div>
+              <p class="eyebrow">Tu frase</p>
+              <h2>Genera una combinacion nueva cada vez.</h2>
+            </div>
+            <p class="helper">Ctrl + Enter tambien dispara una nueva composicion.</p>
+          </div>
+
+          <label class="field-label" for="phraseInput">Texto principal</label>
+          <textarea
+            id="phraseInput"
+            name="phrase"
+            spellcheck="true"
+            autocomplete="off"
+          >Lo que vibra con vos siempre encuentra una forma de volver.</textarea>
+
+          <div class="assist-row">
+            <p>
+              Las frases salen en un bloque dominante, con fondo sobrio y color de firma
+              igual al de la frase.
+            </p>
+            <button id="generateBtn" class="button button-primary" type="button">
+              Nueva combinacion
+            </button>
+          </div>
+
+          <div class="actions">
+            <button id="downloadBtn" class="button button-secondary" type="button">
+              Descargar PNG
+            </button>
+            <button id="shareBtn" class="button button-secondary" type="button">
+              Compartir
+            </button>
+            <button id="installBtn" class="button button-ghost button-install" type="button" hidden>
+              Instalar app
+            </button>
+          </div>
+
+          <section class="status-card">
+            <div class="spec">
+              <span class="spec-label">Tipografia</span>
+              <strong id="fontValue">Cargando...</strong>
+            </div>
+            <div class="spec">
+              <span class="spec-label">Paleta</span>
+              <strong id="toneValue">Cargando...</strong>
+            </div>
+            <div class="spec">
+              <span class="spec-label">Firma</span>
+              <strong>@luchilisdero</strong>
+            </div>
+          </section>
+
+          <p id="statusMessage" class="status-message" aria-live="polite">
+            Preparando la primera historia...
+          </p>
+        </section>
+
+        <aside class="preview-column reveal">
+          <section class="panel preview-panel">
+            <div class="preview-header">
+              <div>
+                <p class="eyebrow">Vista previa</p>
+                <h2>Lista para historia y para compartir.</h2>
+              </div>
+              <span class="preview-dimension">9:16</span>
+            </div>
+
+            <div class="canvas-shell">
+              <canvas
+                id="storyCanvas"
+                width="1080"
+                height="1920"
+                role="img"
+                aria-label="Vista previa de la historia generada"
+              ></canvas>
+            </div>
+
+            <p class="preview-note">
+              En desktop podes instalarla como app. En iPhone o iPad usa Compartir y luego
+              Anadir a pantalla de inicio.
+            </p>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
