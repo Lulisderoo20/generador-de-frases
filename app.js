@@ -1,7 +1,7 @@
 const STORY_WIDTH = 1080;
 const STORY_HEIGHT = 1920;
 const DEFAULT_PHRASE = "Lo que vibra con vos siempre encuentra una forma de volver.";
-const SIGNATURE = "@luchilisdero";
+const DEFAULT_SIGNATURE = "@luchilisdero";
 
 const palettes = [
   {
@@ -52,6 +52,102 @@ const palettes = [
     accent: "#d9c0ff",
     frame: "#775b95",
   },
+  {
+    name: "Naranja y rosa",
+    background: ["#120b0f", "#1a1016", "#09060a"],
+    glowA: "#8b3f28",
+    glowB: "#7a2f58",
+    accent: "#ffb089",
+    frame: "#a15a63",
+  },
+  {
+    name: "Rosa sunset",
+    background: ["#100a11", "#1b1018", "#07050a"],
+    glowA: "#6b2f48",
+    glowB: "#93492c",
+    accent: "#ff9dc6",
+    frame: "#9a6177",
+  },
+  {
+    name: "Verde y rosa",
+    background: ["#09110d", "#101710", "#060907"],
+    glowA: "#2f5a3e",
+    glowB: "#73375f",
+    accent: "#f3a6cf",
+    frame: "#69806a",
+  },
+  {
+    name: "Lima fosforescente",
+    background: ["#0d1008", "#161b0d", "#070904"],
+    glowA: "#566b1b",
+    glowB: "#243414",
+    accent: "#d9ff5f",
+    frame: "#7c8e3f",
+  },
+  {
+    name: "Melon pop",
+    background: ["#120b0d", "#1a1012", "#090608"],
+    glowA: "#984932",
+    glowB: "#77304f",
+    accent: "#ff9f87",
+    frame: "#9d625d",
+  },
+  {
+    name: "Citrico editorial",
+    background: ["#101009", "#17160d", "#080804"],
+    glowA: "#6c651d",
+    glowB: "#38401e",
+    accent: "#f1ef95",
+    frame: "#8c8650",
+  },
+  {
+    name: "Matcha bubblegum",
+    background: ["#0a100d", "#101813", "#050806"],
+    glowA: "#365340",
+    glowB: "#7f3558",
+    accent: "#ff9fca",
+    frame: "#66806a",
+  },
+  {
+    name: "Mandarina digital",
+    background: ["#130b08", "#1c100e", "#080504"],
+    glowA: "#93432a",
+    glowB: "#8c3551",
+    accent: "#ffb45f",
+    frame: "#a16858",
+  },
+  {
+    name: "Azul y lima",
+    background: ["#091018", "#101723", "#060910"],
+    glowA: "#1c4f6a",
+    glowB: "#465f19",
+    accent: "#d7ff7a",
+    frame: "#688260",
+  },
+  {
+    name: "Coral de club",
+    background: ["#110a0d", "#1a1013", "#070508"],
+    glowA: "#893b33",
+    glowB: "#693768",
+    accent: "#ff968d",
+    frame: "#9a6263",
+  },
+  {
+    name: "Cherry chrome",
+    background: ["#10090c", "#181015", "#060508"],
+    glowA: "#77293a",
+    glowB: "#36406e",
+    accent: "#ff9ab1",
+    frame: "#8c5e77",
+  },
+  {
+    name: "Arena acida",
+    background: ["#111009", "#17150d", "#080703"],
+    glowA: "#6b5a1d",
+    glowB: "#414325",
+    accent: "#f6df72",
+    frame: "#9a8656",
+  },
 ];
 
 const fontChoices = [
@@ -66,18 +162,20 @@ const fontChoices = [
 ];
 
 const phraseInput = document.querySelector("#phraseInput");
+const signatureInput = document.querySelector("#signatureInput");
 const generateButton = document.querySelector("#generateBtn");
 const downloadButton = document.querySelector("#downloadBtn");
 const shareButton = document.querySelector("#shareBtn");
 const installButton = document.querySelector("#installBtn");
 const fontValue = document.querySelector("#fontValue");
 const toneValue = document.querySelector("#toneValue");
+const signatureValue = document.querySelector("#signatureValue");
 const statusMessage = document.querySelector("#statusMessage");
+const storyStage = document.querySelector("#storyStage");
 const canvas = document.querySelector("#storyCanvas");
 const context = canvas.getContext("2d", { alpha: false });
 
 let currentStyle = null;
-let currentBlob = null;
 let deferredInstallPrompt = null;
 let grainPattern = null;
 
@@ -148,8 +246,25 @@ function makeStyle() {
   };
 }
 
-function sanitizePhrase(value) {
+function normalizePhrase(value) {
+  return value
+    .replace(/\r\n?/g, "\n")
+    .split("\n")
+    .map((line) => line.replace(/[ \t]+/g, " ").trim())
+    .join("\n")
+    .trim();
+}
+
+function normalizeInlineText(value) {
   return value.replace(/\s+/g, " ").trim();
+}
+
+function getCurrentPhrase() {
+  return normalizePhrase(phraseInput.value) || DEFAULT_PHRASE;
+}
+
+function getCurrentSignature() {
+  return normalizeInlineText(signatureInput.value) || DEFAULT_SIGNATURE;
 }
 
 function splitLongWord(word, fontSize, fontFamily, maxWidth) {
@@ -177,33 +292,41 @@ function splitLongWord(word, fontSize, fontFamily, maxWidth) {
 
 function wrapText(text, fontSize, fontFamily, maxWidth) {
   context.font = `italic 700 ${fontSize}px ${fontFamily}`;
-  const words = text.split(" ");
   const lines = [];
-  let currentLine = "";
 
-  for (const word of words) {
-    const candidate = currentLine ? `${currentLine} ${word}` : word;
-
-    if (context.measureText(candidate).width <= maxWidth) {
-      currentLine = candidate;
+  for (const rawLine of text.split("\n")) {
+    if (!rawLine) {
+      lines.push("");
       continue;
     }
 
-    if (currentLine) {
+    const words = rawLine.split(" ");
+    let currentLine = "";
+
+    for (const word of words) {
+      const candidate = currentLine ? `${currentLine} ${word}` : word;
+
+      if (context.measureText(candidate).width <= maxWidth) {
+        currentLine = candidate;
+        continue;
+      }
+
+      if (currentLine) {
+        lines.push(currentLine);
+      }
+
+      if (context.measureText(word).width <= maxWidth) {
+        currentLine = word;
+      } else {
+        const pieces = splitLongWord(word, fontSize, fontFamily, maxWidth);
+        lines.push(...pieces.slice(0, -1));
+        currentLine = pieces[pieces.length - 1] || "";
+      }
+    }
+
+    if (currentLine || rawLine === "") {
       lines.push(currentLine);
     }
-
-    if (context.measureText(word).width <= maxWidth) {
-      currentLine = word;
-    } else {
-      const pieces = splitLongWord(word, fontSize, fontFamily, maxWidth);
-      lines.push(...pieces.slice(0, -1));
-      currentLine = pieces[pieces.length - 1] || "";
-    }
-  }
-
-  if (currentLine) {
-    lines.push(currentLine);
   }
 
   return lines;
@@ -328,27 +451,39 @@ function drawPhraseBlock(phrase, style) {
   context.shadowBlur = 0;
 }
 
-function drawSignature(style) {
+function drawSignature(style, signature) {
   context.textAlign = "center";
   context.fillStyle = style.palette.accent;
   context.font = `italic 700 62px ${style.font.family}`;
-  context.fillText(SIGNATURE, STORY_WIDTH / 2, STORY_HEIGHT - 168);
+  context.fillText(signature, STORY_WIDTH / 2, STORY_HEIGHT - 168);
 }
 
-function renderCurrentStory(phrase) {
+function applyPreviewStyle(style) {
+  storyStage.style.setProperty("--story-accent", style.palette.accent);
+  storyStage.style.setProperty("--story-font-family", style.font.family);
+  fontValue.textContent = style.font.name;
+  toneValue.textContent = style.palette.name;
+  signatureValue.textContent = getCurrentSignature();
+}
+
+function renderCurrentStory(phrase, options = {}) {
+  const { includeSignature = false } = options;
+
   if (!currentStyle) {
     currentStyle = makeStyle();
   }
 
-  const safePhrase = sanitizePhrase(phrase) || DEFAULT_PHRASE;
-  currentBlob = null;
+  const safePhrase = normalizePhrase(phrase) || DEFAULT_PHRASE;
+  const safeSignature = getCurrentSignature();
   context.clearRect(0, 0, STORY_WIDTH, STORY_HEIGHT);
   drawBackdrop(currentStyle);
   drawPhraseBlock(safePhrase, currentStyle);
-  drawSignature(currentStyle);
 
-  fontValue.textContent = currentStyle.font.name;
-  toneValue.textContent = currentStyle.palette.name;
+  if (includeSignature) {
+    drawSignature(currentStyle, safeSignature);
+  }
+
+  applyPreviewStyle(currentStyle);
 }
 
 function setStatus(message) {
@@ -366,24 +501,25 @@ function slugify(value) {
 }
 
 function createFileName() {
-  const phrase = sanitizePhrase(phraseInput.value) || DEFAULT_PHRASE;
+  const phrase = getCurrentPhrase().replace(/\s+/g, " ");
   const slug = slugify(phrase) || "historia";
   return `luchi-story-${slug}.png`;
 }
 
 function getCanvasBlob() {
-  if (currentBlob) {
-    return Promise.resolve(currentBlob);
-  }
-
   return new Promise((resolve, reject) => {
+    signatureInput.classList.add("signature-input--hidden");
+    renderCurrentStory(phraseInput.value, { includeSignature: true });
+
     canvas.toBlob((blob) => {
+      signatureInput.classList.remove("signature-input--hidden");
+      renderCurrentStory(phraseInput.value);
+
       if (!blob) {
         reject(new Error("No se pudo crear la imagen."));
         return;
       }
 
-      currentBlob = blob;
       resolve(blob);
     }, "image/png");
   });
@@ -553,6 +689,15 @@ function attachEvents() {
       setStatus("Nueva combinacion lista para descargar o compartir.");
     }
   });
+
+  signatureInput.addEventListener("input", () => {
+    signatureValue.textContent = getCurrentSignature();
+  });
+
+  signatureInput.addEventListener("blur", () => {
+    signatureInput.value = getCurrentSignature();
+    signatureValue.textContent = signatureInput.value;
+  });
 }
 
 async function boot() {
@@ -561,6 +706,7 @@ async function boot() {
   registerServiceWorker();
   attachEvents();
   await preloadFonts();
+  signatureInput.value = DEFAULT_SIGNATURE;
   refreshStory(true);
   setStatus("Tu historia ya esta lista. Toca Nueva combinacion si queres otra mezcla.");
 }

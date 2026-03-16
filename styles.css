@@ -205,6 +205,18 @@ h2 {
   font-weight: 500;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 textarea {
   width: 100%;
   min-height: 236px;
@@ -354,6 +366,12 @@ textarea:focus {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.story-stage {
+  position: relative;
+  --story-accent: var(--accent);
+  --story-font-family: "Fraunces", serif;
+}
+
 canvas {
   display: block;
   width: 100%;
@@ -362,6 +380,49 @@ canvas {
   border-radius: 28px;
   background: #101114;
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.32);
+}
+
+.signature-input {
+  position: absolute;
+  left: 50%;
+  bottom: 7.2%;
+  z-index: 1;
+  width: calc(100% - 132px);
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--story-accent);
+  caret-color: var(--story-accent);
+  font-family: var(--story-font-family);
+  font-size: clamp(1.08rem, 2vw, 1.95rem);
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  transform: translateX(-50%);
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.signature-input::placeholder {
+  color: var(--story-accent);
+  opacity: 0.9;
+}
+
+.signature-input:hover,
+.signature-input:focus {
+  background: rgba(7, 8, 11, 0.2);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  outline: none;
+}
+
+.signature-input--hidden {
+  opacity: 0;
 }
 
 .preview-note {
@@ -439,6 +500,13 @@ canvas {
   textarea {
     min-height: 190px;
     padding: 20px;
+  }
+
+  .signature-input {
+    width: calc(100% - 84px);
+    bottom: 7%;
+    padding: 8px 12px;
+    font-size: clamp(0.95rem, 3.6vw, 1.35rem);
   }
 
   .actions,

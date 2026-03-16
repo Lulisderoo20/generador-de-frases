@@ -53,7 +53,7 @@
           <h1>Historias listas para compartir con look editorial.</h1>
           <p class="hero-text">
             Escribis la frase, la app mezcla tipografias premium y paletas en tendencia,
-            firma cada historia con <strong>@luchilisdero</strong> y te la deja lista para
+            firma cada historia con <strong>tu nombre</strong> y te la deja lista para
             descargar, compartir o instalar como acceso directo.
           </p>
         </div>
@@ -114,7 +114,7 @@
             </div>
             <div class="spec">
               <span class="spec-label">Firma</span>
-              <strong>@luchilisdero</strong>
+              <strong id="signatureValue">@luchilisdero</strong>
             </div>
           </section>
 
@@ -134,18 +134,31 @@
             </div>
 
             <div class="canvas-shell">
-              <canvas
-                id="storyCanvas"
-                width="1080"
-                height="1920"
-                role="img"
-                aria-label="Vista previa de la historia generada"
-              ></canvas>
+              <div id="storyStage" class="story-stage">
+                <canvas
+                  id="storyCanvas"
+                  width="1080"
+                  height="1920"
+                  role="img"
+                  aria-label="Vista previa de la historia generada"
+                ></canvas>
+                <label class="sr-only" for="signatureInput">Firma de la historia</label>
+                <input
+                  id="signatureInput"
+                  class="signature-input"
+                  type="text"
+                  value="@luchilisdero"
+                  placeholder="@luchilisdero"
+                  maxlength="40"
+                  spellcheck="false"
+                  autocomplete="off"
+                >
+              </div>
             </div>
 
             <p class="preview-note">
-              En desktop podes instalarla como app. En iPhone o iPad usa Compartir y luego
-              Anadir a pantalla de inicio.
+              Toca la firma dentro de la historia para editarla. En desktop podes instalarla
+              como app. En iPhone o iPad usa Compartir y luego Anadir a pantalla de inicio.
             </p>
           </section>
         </aside>
